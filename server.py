@@ -1,17 +1,20 @@
-import BaseHTTPServer
+import SimpleHTTPServer
+import SocketServer
 
-class handler(BaseHTTPServer.BaseHTTPRequestHandler):
+PORT = 3000
+class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 	def do_GET(self):
-		self.send_response(200)
-		self.send_header('Content-Type', 'text/html')
-		self.end_headers()
-		self.wfile.write( open('index.html').read() )
+		if self.path == '/search':
+			self.path = '/'
+			
+		f = self.send_head()
+		if f:
+			self.copyfile(f, self.wfile)
+			f.close()
 
-def run(server_class=BaseHTTPServer.HTTPServer,
-		handler_class=BaseHTTPServer.BaseHTTPRequestHandler):
-		addr = ('', 3000)
-		httpd = server_class(addr, handler_class)
-		httpd.serve_forever()
+httpd = SocketServer.TCPServer(("",PORT), MyHandler)
+
 		
 if __name__ == "__main__":
-	run(handler_class=handler)
+	print "Serving at port: ", PORT
+	httpd.serve_forever()

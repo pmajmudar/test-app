@@ -13,8 +13,8 @@ requirejs.config({
 	}
 });
 
-requirejs(['jquery', 'underscore', 'backbone', 'src/model'],
-function($, _, Backbone, model){
+requirejs(['jquery', 'underscore', 'backbone', 'src/doc_model'],
+function($, _, Backbone, Model){
 	
 	// Create router with allowed routes
 	var AppRouter = Backbone.Router.extend({
@@ -35,6 +35,10 @@ function($, _, Backbone, model){
 		console.log("In default");
 		console.log(pages);
 	});
+	
+
+	var m = new Model;
+	console.log(m);
 	
 	Backbone.history.start({pushState: true});
 });

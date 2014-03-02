@@ -4,7 +4,7 @@ import SocketServer
 PORT = 3000
 class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 	def do_GET(self):
-		if self.path == '/search':
+		if self.path == '/search' or self.path == '/login':
 			self.path = '/'
 			
 		f = self.send_head()

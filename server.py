@@ -1,10 +1,12 @@
 import SimpleHTTPServer
 import SocketServer
+import re
 
 PORT = 3000
 class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 	def do_GET(self):
-		if self.path == '/search' or self.path == '/login':
+		class_path = re.compile(r'/classify*')
+		if class_path.match(self.path) or self.path == '/login':
 			self.path = '/'
 			
 		f = self.send_head()

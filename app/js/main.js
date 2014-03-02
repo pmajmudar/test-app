@@ -2,7 +2,7 @@
 
 requirejs.config({
 	// Default load from js/lib
-	baseUrl: 'app/js/libs',
+	baseUrl: 'js/libs',
 	// if it starts with src then use the src dir.
 	// This is relative to the baseurl
 	paths:{

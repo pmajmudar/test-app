@@ -12,6 +12,9 @@ def _send(data, err=None):
 			"data":data}
 	resp = make_response(json.dumps(dict_))
 	resp.headers['Content-Type'] ='application/json'
+	resp.headers['Access-Control-Allow-Origin'] = '*'
+	resp.headers['Access-Control-Allow-Headers']='content-type,accept,origin,X-HTTP-Method-Override'
+	resp.headers['Cache-Control']= 'no-cache'
 	return resp
 	
 @app.errorhandler(404)
@@ -29,7 +32,7 @@ def docs():
 	app.logger.info("hello")
 	return _send([])
 
-@app.route("/doc/<int:docid>/", methods=['GET', 'POST'])
+@app.route("/doc/<int:docid>", methods=['GET', 'POST'])
 def doc(docid):
 	"""Return a doc for classification."""
 	
